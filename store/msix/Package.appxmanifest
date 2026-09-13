@@ -6,19 +6,21 @@
   IgnorableNamespaces="uap rescap">
   <!--
     Optional self-packaged MSIX identity. Tauri 2 does not emit .msix.
-    Partner Center "EXE or MSI app" submissions do not need this file.
+    Partner Center reserved this product as "MSIX or PWA app" (not EXE/MSI).
+    If the listing stays on that type, pack with this manifest rather than
+    uploading the Tauri NSIS/MSI installer.
 
     Reserved Partner Center identities:
       Store ID              9NJXSRQ51R1W
       Identity/@Name        30625JiaXiangHuang.USBToolkitforTesla
       Package Family Name   30625JiaXiangHuang.USBToolkitforTesla_0qzz0z9ekxn9j
       PublisherDisplayName  JiaXiang Huang
-      Identity/@Publisher   TODO — copy CN= from Partner Center (never invent a certificate)
+      Identity/@Publisher   CN=7EEF2A3C-D8BC-4B91-9F2D-728958623431
     Signing: leave unset here. Do not commit .pfx / .p12 files.
   -->
   <Identity
     Name="30625JiaXiangHuang.USBToolkitforTesla"
-    Publisher="CN=TODO-PARTNER-CENTER-PUBLISHER-ID"
+    Publisher="CN=7EEF2A3C-D8BC-4B91-9F2D-728958623431"
     Version="0.2.0.0"
     ProcessorArchitecture="x64" />
   <Properties>
