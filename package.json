@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "tauri": "node scripts/tauri.mjs",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "promo": "node scripts/record-promo.mjs"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",

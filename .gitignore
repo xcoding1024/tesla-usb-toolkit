@@ -52,6 +52,9 @@ Desktop.ini
 *.swp
 *~
 
+# Local promo recording tools (Playwright)
+scripts/.promo-tools/
+
 # Test / coverage
 coverage/
 .nyc_output/

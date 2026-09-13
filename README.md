@@ -2,6 +2,8 @@
 
 [English](README.md) | [中文](README.zh.md)
 
+![Tesla USB Toolkit tour](docs/promo/tour.gif)
+
 Cross-platform desktop app for **Windows / macOS**. Plug in a USB drive to scan TeslaCam clips, Light Shows, wraps, and lock chimes, then format the drive safely for the car.
 
 The UI is a dark glass sidebar (Overview, Format, Dashcam, Light Show, Wraps, Lock Chime; Settings at the bottom). Switching drives rescans automatically. Formatting on Windows and macOS is guarded so system disks cannot be erased. Linux exposes the API and explains that mkfs is not run.
@@ -75,6 +77,12 @@ Typecheck and unit tests:
 ```bash
 npm run typecheck
 npm test
+```
+
+Regenerate the README promo GIF (`docs/promo/tour.gif`). Needs `ffmpeg`:
+
+```bash
+npm run promo
 ```
 
 Release build (Tauri deps must be installed):

@@ -4,6 +4,8 @@
 
 [English](README.md) | [中文](README.zh.md)
 
+![Tesla USB Toolkit tour](docs/promo/tour.gif)
+
 跨平台桌面应用，支持 **Windows / macOS**。插入 U 盘后可扫描 TeslaCam 行车记录、灯光秀、贴纸与锁车音效，并在电脑上安全格式化，供车机使用。
 
 界面为暗色玻璃侧栏（总览、格式化、行车记录、灯光秀、贴纸、锁车音效；设置在底部）。切换磁盘会自动重新扫描。Windows 与 macOS 的格式化有保护，不会擦除系统盘。Linux 仅暴露接口，并说明不会执行 mkfs。
@@ -77,6 +79,12 @@ npm run tauri dev
 ```bash
 npm run typecheck
 npm test
+```
+
+重新生成 README 宣传 GIF（`docs/promo/tour.gif`）。需要本机 `ffmpeg`：
+
+```bash
+npm run promo
 ```
 
 发布构建（需已安装 Tauri 依赖）：

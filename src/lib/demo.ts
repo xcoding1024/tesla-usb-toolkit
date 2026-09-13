@@ -18,8 +18,13 @@ const CLIP_B = 4989;
 const TONE = 88278;
 const LOCK = 88278;
 const BEEP = 33062;
-const PNG = { Sunset: 35244, Cyber: 91749, Mountain: 16759, too_big: 18803 } as const;
 const FSEQ = { holiday: 4832, cyberpunk: 16032, aurora: 3872, lonely: 992 } as const;
+const DEMO_WRAPS = [
+  { name: "Sakura.png", bytes: 268074, width: 1024, height: 1024 },
+  { name: "Leopard.png", bytes: 334809, width: 1024, height: 1024 },
+  { name: "Ice_Cream.png", bytes: 85992, width: 1024, height: 1024 },
+  { name: "Camo_Pink.png", bytes: 136617, width: 1024, height: 768 },
+] as const;
 
 function camClip(
   name: string,
@@ -49,6 +54,10 @@ function media(name: string, path: string, bytes: number): ListedMediaFile {
 
 function wrap(name: string, folder: string, bytes: number, width: number | null, height: number | null): WrapFile {
   return { name, folder, path: `/demo/wraps/${name}`, bytes, width, height };
+}
+
+function officialDemoWraps(): WrapFile[] {
+  return DEMO_WRAPS.map((asset) => wrap(asset.name, "Wraps", asset.bytes, asset.width, asset.height));
 }
 
 const fullClips: TeslaCamClipFile[] = [
@@ -96,12 +105,7 @@ const demoFull: VolumeSnapshot = {
   boomboxFiles: fullBoomboxListing.map((file) => file.name),
   hasLockChime: true,
   audioFilesAtRoot: [],
-  wrapFiles: [
-    wrap("Sunset.png", "Wraps", PNG.Sunset, 1024, 1024),
-    wrap("Cyber.png", "Wraps", PNG.Cyber, 1024, 768),
-    wrap("Mountain.png", "Wraps", PNG.Mountain, 768, 768),
-    wrap("too_big.png", "Wraps", 2 * MB, 2048, 2048),
-  ],
+  wrapFiles: [...officialDemoWraps(), wrap("too_big.png", "Wraps", 2 * MB, 2048, 2048)],
   teslaCamClips: fullClips,
   lightShowListing: fullLightShowListing,
   boomboxListing: fullBoomboxListing,
@@ -239,8 +243,7 @@ const demoWraps: VolumeSnapshot = {
   hasLockChime: false,
   audioFilesAtRoot: [],
   wrapFiles: [
-    wrap("Sunset.png", "Wraps", PNG.Sunset, 1024, 1024),
-    wrap("Cyber.png", "Wraps", PNG.Cyber, 1024, 768),
+    ...officialDemoWraps().slice(0, 2),
     wrap("too_big.png", "Wraps", 2 * MB, 2048, 2048),
     { name: "notes!.jpg", folder: "Wraps", path: null, bytes: 80000, width: null, height: null },
   ],
