@@ -1,6 +1,6 @@
 # Store distribution
 
-**中文摘要：** GitHub 版继续用设置里的 Releases 更新。Microsoft Store / Mac App Store 构建会编译掉 GitHub 自更新。Tauri 2 不产出 `.msix`，商店提交用离线 WebView2 的 NSIS/MSI，或自行用 `Package.appxmanifest` 打包。Mac App Store 需要沙盒；`diskutil` 格式化 U 盘很可能被拒或无法工作。提交前替换 Partner Center / Apple Team ID，不要伪造证书。
+**中文摘要：** GitHub 版继续用设置里的 Releases 更新。Microsoft Store / Mac App Store 构建会编译掉 GitHub 自更新。Tauri 2 不产出 `.msix`，商店提交用离线 WebView2 的 NSIS/MSI，或自行用 `Package.appxmanifest` 打包。Mac App Store 需要沙盒；`diskutil` 格式化 U 盘很可能被拒或无法工作。商店身份已预留；Publisher `CN=` 仍须从 Partner Center 复制，不要伪造证书。
 
 This repo ships **three desktop channels**. Do not upload binaries to the stores from CI; this is packaging prep only.
 
@@ -11,6 +11,18 @@ This repo ships **three desktop channels**. Do not upload binaries to the stores
 | **Mac App Store** | GitHub updater **compiled out** | Signed `.app` → installer `.pkg` | Mac App Store |
 
 Bundle id stays `com.coding1024.tesla-toolkit`. English display name stays **USB Toolkit for Tesla**. Desktop only (no iOS / Android).
+
+## Reserved identities
+
+Reserved in Partner Center / App Store Connect. Publisher `CN=` is still unknown — copy it from Partner Center when available. Do not invent a certificate Subject.
+
+| Field | Value |
+| --- | --- |
+| Microsoft Store ID | `9NJXSRQ51R1W` |
+| Package identity Name | `30625JiaXiangHuang.USBToolkitforTesla` |
+| Package Family Name (PFN) | `30625JiaXiangHuang.USBToolkitforTesla_0qzz0z9ekxn9j` |
+| Mac App Store Connect App ID | `6811606662` |
+| Apple Team ID | `GFJDX458W5` |
 
 ## Feature flag
 
@@ -74,12 +86,12 @@ Optional CI: [`.github/workflows/store.yml`](.github/workflows/store.yml) (`work
 Requires a Mac, Apple Developer Program, and a **Mac App Store Connect** provisioning profile. Official steps: [Tauri App Store](https://v2.tauri.app/distribute/app-store/).
 
 ```bash
-# Replace TEAMID in src-tauri/macos/Entitlements.store.plist first.
+# Entitlements already use Team ID GFJDX458W5.
 # Copy the downloaded profile to src-tauri/macos/embedded.provisionprofile
 # (gitignored), then add bundle.macOS.files.embedded.provisionprofile in the
 # App Store config or pass it locally.
 
-export APPLE_SIGNING_IDENTITY="Apple Distribution: Your Name (TEAMID)"
+export APPLE_SIGNING_IDENTITY="Apple Distribution: Your Name (GFJDX458W5)"
 npm ci
 npm run tauri:mac-app-store
 ```
@@ -88,7 +100,7 @@ Then sign a `.pkg` with a **Mac Installer Distribution** certificate and upload 
 
 [`src-tauri/tauri.appstore.conf.json`](src-tauri/tauri.appstore.conf.json) enables `store-channel`, hardened runtime, Utility category (from the main config), 10.15 minimum, and [`macos/Entitlements.store.plist`](src-tauri/macos/Entitlements.store.plist).
 
-Replace `TEAMID` in the entitlements with the real Apple Team ID (`TEAMID.com.coding1024.tesla-toolkit`). **Do not invent signing certificates.** `signingIdentity` stays unset in git; set `APPLE_SIGNING_IDENTITY` when you build.
+Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`). **Do not invent signing certificates.** `signingIdentity` stays unset in git; set `APPLE_SIGNING_IDENTITY` when you build.
 
 [`src-tauri/Info.plist`](src-tauri/Info.plist) sets `ITSAppUsesNonExemptEncryption` to false (HTTPS-only) and a removable-volume usage string.
 
@@ -124,13 +136,13 @@ Replace `TEAMID` in the entitlements with the real Apple Team ID (`TEAMID.com.co
 
 ## What you must fill later
 
+Reserved Store ID, package identity, PFN, ASC App ID, and Team ID are listed above. Still missing:
+
 | Placeholder | Where | Real value |
 | --- | --- | --- |
-| `TEAMID` | `src-tauri/macos/Entitlements.store.plist` | Apple Team ID |
 | `APPLE_SIGNING_IDENTITY` | env at build time | Apple Distribution cert **name** from Keychain |
 | `embedded.provisionprofile` | `src-tauri/macos/` (gitignored) | Mac App Store Connect profile |
-| `CN=TODO-PARTNER-CENTER-PUBLISHER-ID` | `store/msix/Package.appxmanifest` | Partner Center publisher CN |
-| Identity `Name` | same manifest | Partner Center package identity |
+| `CN=TODO-PARTNER-CENTER-PUBLISHER-ID` | `store/msix/Package.appxmanifest` | Partner Center publisher `CN=` — copy from the console, never invent |
 | `certificateThumbprint` | only when you Authenticode-sign locally | SHA1 of a real cert — never a made-up hash |
 
 ## References

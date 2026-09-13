@@ -8,20 +8,22 @@
     Optional self-packaged MSIX identity. Tauri 2 does not emit .msix.
     Partner Center "EXE or MSI app" submissions do not need this file.
 
-    Replace before MakeAppx / winapp pack:
-      Identity/@Name        Partner Center package identity name
-      Identity/@Publisher   CN=... from Partner Center (never invent a certificate)
-      PublisherDisplayName  Partner Center publisher display name
+    Reserved Partner Center identities:
+      Store ID              9NJXSRQ51R1W
+      Identity/@Name        30625JiaXiangHuang.USBToolkitforTesla
+      Package Family Name   30625JiaXiangHuang.USBToolkitforTesla_0qzz0z9ekxn9j
+      PublisherDisplayName  JiaXiang Huang
+      Identity/@Publisher   TODO — copy CN= from Partner Center (never invent a certificate)
     Signing: leave unset here. Do not commit .pfx / .p12 files.
   -->
   <Identity
-    Name="coding1024.USBToolkitforTesla"
+    Name="30625JiaXiangHuang.USBToolkitforTesla"
     Publisher="CN=TODO-PARTNER-CENTER-PUBLISHER-ID"
     Version="0.2.0.0"
     ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>USB Toolkit for Tesla</DisplayName>
-    <PublisherDisplayName>coding1024</PublisherDisplayName>
+    <PublisherDisplayName>JiaXiang Huang</PublisherDisplayName>
     <Description>Scan and format USB drives for Tesla vehicles.</Description>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
