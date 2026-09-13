@@ -31,6 +31,7 @@ MVP 已可用。维护者：**JiaXiang Huang**。
 - 格式化指南：[`docs/FORMAT_GUIDE.md`](docs/FORMAT_GUIDE.md)
 - 内容类型：[`docs/CONTENT_TYPES.md`](docs/CONTENT_TYPES.md)
 - 路线图：[`docs/ROADMAP.md`](docs/ROADMAP.md)
+- 商店打包：[`STORE.md`](STORE.md)
 
 ## 技术栈
 
@@ -96,6 +97,16 @@ npm run tauri build
 ```
 
 `npx tauri dev` / `npx tauri build` 同样可用。支持的包管理器是 **npm**。
+
+GitHub 发布渠道与商店渠道：
+
+```bash
+npm run tauri:github            # GitHub Releases（MSI / NSIS / DMG，应用内更新）
+npm run tauri:microsoft-store   # Microsoft Store 的 EXE/MSI（离线 WebView2，无 GitHub 更新）
+npm run tauri:mac-app-store     # Mac App Store 的 .app（沙盒 entitlements，无 GitHub 更新）
+```
+
+Partner Center / App Store Connect 占位符与已知阻碍见 [`STORE.md`](STORE.md)。
 
 ## 判定规则（简要）
 

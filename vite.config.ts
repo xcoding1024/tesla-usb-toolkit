@@ -5,12 +5,14 @@ import react from "@vitejs/plugin-react";
 // @ts-expect-error process is a nodejs global
 const host = process.env.TAURI_DEV_HOST;
 const appVersion = JSON.parse(readFileSync(new URL("./package.json", import.meta.url), "utf8")).version as string;
+const distributionChannel = process.env.TOOLKIT_CHANNEL === "store" ? "store" : "github";
 
 // https://vite.dev/config/
 export default defineConfig(async () => ({
   plugins: [react()],
   define: {
     __APP_VERSION__: JSON.stringify(appVersion),
+    __DISTRIBUTION_CHANNEL__: JSON.stringify(distributionChannel),
   },
 
   // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`

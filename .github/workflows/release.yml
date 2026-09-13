@@ -1,3 +1,7 @@
+# GitHub Release channel (MSI / NSIS / DMG) with the in-app updater enabled.
+# Microsoft Store / Mac App Store packaging is documented in STORE.md and
+# optionally built by .github/workflows/store.yml — do not attach store
+# configs here or the GitHub updater will be compiled out.
 name: Release
 
 on:

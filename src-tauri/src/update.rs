@@ -1,17 +1,29 @@
+use serde::Serialize;
+
+#[cfg(not(feature = "store-channel"))]
 use std::fs::{self, File};
+#[cfg(not(feature = "store-channel"))]
 use std::io::Write;
+#[cfg(not(feature = "store-channel"))]
 use std::path::{Path, PathBuf};
+#[cfg(not(feature = "store-channel"))]
 use std::sync::OnceLock;
+#[cfg(not(feature = "store-channel"))]
 use std::time::Duration;
 
+#[cfg(not(feature = "store-channel"))]
 use futures_util::StreamExt;
-use serde::Serialize;
+#[cfg(not(feature = "store-channel"))]
 use tauri::{AppHandle, Emitter};
+#[cfg(not(feature = "store-channel"))]
 use tauri_plugin_opener::OpenerExt;
 
+#[cfg(not(feature = "store-channel"))]
 const GITHUB_REPO: &str = "xcoding1024/tesla-usb-toolkit";
+#[cfg(not(feature = "store-channel"))]
 const LATEST_RELEASE_URL: &str =
     "https://api.github.com/repos/xcoding1024/tesla-usb-toolkit/releases/latest";
+#[cfg(not(feature = "store-channel"))]
 const ATOM_URL: &str = "https://github.com/xcoding1024/tesla-usb-toolkit/releases.atom";
 const DOWNLOAD_PREFIX: &str =
     "https://github.com/xcoding1024/tesla-usb-toolkit/releases/download/";
@@ -23,8 +35,23 @@ pub struct AppInfo {
     pub version: String,
     pub platform: String,
     pub arch: String,
+    pub distribution_channel: String,
+    pub github_updates: bool,
 }
 
+pub fn distribution_channel() -> &'static str {
+    if cfg!(feature = "store-channel") {
+        "store"
+    } else {
+        "github"
+    }
+}
+
+pub fn github_updates_enabled() -> bool {
+    !cfg!(feature = "store-channel")
+}
+
+#[cfg(not(feature = "store-channel"))]
 #[derive(Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 struct DownloadProgress {
@@ -32,6 +59,7 @@ struct DownloadProgress {
     total: Option<u64>,
 }
 
+#[cfg(not(feature = "store-channel"))]
 fn http_client() -> Result<&'static reqwest::Client, String> {
     static CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
     if let Some(client) = CLIENT.get() {
@@ -86,6 +114,7 @@ pub fn sanitize_installer_filename(name: &str) -> Result<String, String> {
     Ok(base.to_string())
 }
 
+#[cfg(not(feature = "store-channel"))]
 fn download_dir() -> Result<PathBuf, String> {
     dirs::download_dir()
         .or_else(dirs::home_dir)
@@ -98,9 +127,12 @@ pub fn app_info() -> AppInfo {
         version: env!("CARGO_PKG_VERSION").into(),
         platform: host_platform().into(),
         arch: host_arch().into(),
+        distribution_channel: distribution_channel().into(),
+        github_updates: github_updates_enabled(),
     }
 }
 
+#[cfg(not(feature = "store-channel"))]
 #[tauri::command]
 pub async fn fetch_latest_github_release() -> Result<serde_json::Value, String> {
     let response = http_client()?
@@ -116,6 +148,7 @@ pub async fn fetch_latest_github_release() -> Result<serde_json::Value, String> 
     response.json().await.map_err(|err| err.to_string())
 }
 
+#[cfg(not(feature = "store-channel"))]
 #[tauri::command]
 pub async fn fetch_github_releases_atom() -> Result<String, String> {
     let response = http_client()?
@@ -130,6 +163,7 @@ pub async fn fetch_github_releases_atom() -> Result<String, String> {
     response.text().await.map_err(|err| err.to_string())
 }
 
+#[cfg(not(feature = "store-channel"))]
 #[tauri::command]
 pub async fn download_update_asset(
     app: AppHandle,
@@ -198,6 +232,7 @@ pub async fn download_update_asset(
     Ok(dest.to_string_lossy().into_owned())
 }
 
+#[cfg(not(feature = "store-channel"))]
 #[tauri::command]
 pub fn open_update_installer(app: AppHandle, path: String) -> Result<(), String> {
     let file = Path::new(&path);
@@ -214,6 +249,7 @@ pub fn open_update_installer(app: AppHandle, path: String) -> Result<(), String>
         .map_err(|err| err.to_string())
 }
 
+#[cfg(not(feature = "store-channel"))]
 #[tauri::command]
 pub fn open_external_url(app: AppHandle, url: String) -> Result<(), String> {
     if !is_allowed_release_url(&url) {
@@ -224,6 +260,7 @@ pub fn open_external_url(app: AppHandle, url: String) -> Result<(), String> {
         .map_err(|err| err.to_string())
 }
 
+#[cfg(not(feature = "store-channel"))]
 #[allow(dead_code)]
 pub fn github_repo() -> &'static str {
     GITHUB_REPO
@@ -232,6 +269,20 @@ pub fn github_repo() -> &'static str {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(not(feature = "store-channel"))]
+    #[test]
+    fn github_channel_is_the_default_build() {
+        assert_eq!(distribution_channel(), "github");
+        assert!(github_updates_enabled());
+    }
+
+    #[cfg(feature = "store-channel")]
+    #[test]
+    fn store_channel_disables_github_updates() {
+        assert_eq!(distribution_channel(), "store");
+        assert!(!github_updates_enabled());
+    }
 
     #[test]
     fn allows_only_this_repo_download_urls() {

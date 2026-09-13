@@ -11,6 +11,11 @@ rust-version = "1.88"
 name = "tesla_usb_detector_lib"
 crate-type = ["staticlib", "cdylib", "rlib"]
 
+[features]
+default = []
+# Store / Partner Center / Mac App Store builds. Compiles out the GitHub Releases updater.
+store-channel = []
+
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 

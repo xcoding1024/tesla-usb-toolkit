@@ -47,7 +47,8 @@ fn eject_volume(path: String) -> Result<EjectResult, String> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tauri::Builder::default()
+    #[cfg(not(feature = "store-channel"))]
+    let builder = tauri::Builder::default()
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![
@@ -64,7 +65,24 @@ pub fn run() {
             update::download_update_asset,
             update::open_update_installer,
             update::open_external_url
-        ])
+        ]);
+
+    #[cfg(feature = "store-channel")]
+    let builder = tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_opener::init())
+        .invoke_handler(tauri::generate_handler![
+            list_volumes,
+            scan_path,
+            read_file_head,
+            format_capabilities,
+            preview_format,
+            format_volume,
+            eject_volume,
+            update::app_info
+        ]);
+
+    builder
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

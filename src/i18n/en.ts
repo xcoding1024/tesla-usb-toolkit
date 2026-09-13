@@ -407,6 +407,9 @@ export const en: Messages = {
     updateRateLimited: "GitHub rate-limited this check. Wait a minute and try again.",
     updateBanner: "A new version ({version}) is available.",
     updateBannerAction: "View update",
+    storeUpdates:
+      "This store build is updated by the Microsoft Store or the Mac App Store. GitHub self-update is disabled.",
+    storeUpdatesHint: "Install updates from the store listing, not from GitHub Releases.",
   },
   status: {
     browserPreview:
