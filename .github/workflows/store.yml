@@ -1,0 +1,57 @@
+# Optional store-channel artifacts. Does not publish a GitHub Release
+# and does not upload to Microsoft Store or the Mac App Store.
+# See STORE.md. The tagged GitHub MSI/NSIS/DMG flow stays in release.yml.
+
+name: Store artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  microsoft-store-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Typecheck and unit tests
+        run: |
+          npm run typecheck
+          npm test
+
+      - name: Build Microsoft Store channel (offline WebView2, no GitHub updater)
+        uses: tauri-apps/tauri-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOOLKIT_CHANNEL: store
+        with:
+          uploadUpdaterJson: false
+          uploadUpdaterSignatures: false
+          args: --config src-tauri/tauri.microsoftstore.conf.json
+
+      - name: Upload store-channel Windows installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: microsoft-store-windows
+          path: |
+            src-tauri/target/release/bundle/msi/*.msi
+            src-tauri/target/release/bundle/nsis/*-setup.exe
+          if-no-files-found: warn

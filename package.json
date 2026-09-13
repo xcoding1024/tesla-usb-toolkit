@@ -10,6 +10,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "tauri": "node scripts/tauri.mjs",
+    "tauri:github": "node scripts/tauri.mjs build",
+    "tauri:microsoft-store": "node scripts/tauri.mjs build --config src-tauri/tauri.microsoftstore.conf.json",
+    "tauri:mac-app-store": "node scripts/tauri.mjs build --bundles app --target universal-apple-darwin --config src-tauri/tauri.appstore.conf.json",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "promo": "node scripts/record-promo.mjs"

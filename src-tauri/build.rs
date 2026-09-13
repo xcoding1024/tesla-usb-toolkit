@@ -6,5 +6,9 @@ fn main() {
     println!("cargo:rerun-if-changed=icons/128x128.png");
     println!("cargo:rerun-if-changed=icons/128x128@2x.png");
     println!("cargo:rerun-if-changed=tauri.conf.json");
+    println!("cargo:rerun-if-changed=tauri.microsoftstore.conf.json");
+    println!("cargo:rerun-if-changed=tauri.appstore.conf.json");
+    println!("cargo:rerun-if-changed=macos/Entitlements.store.plist");
+    println!("cargo:rerun-if-changed=Info.plist");
     tauri_build::build()
 }

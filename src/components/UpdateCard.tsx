@@ -1,4 +1,5 @@
 import { interpolate, t } from "../i18n";
+import { githubUpdatesEnabled } from "../lib/channel";
 import { formatBytes } from "../lib/format";
 import { isTauri } from "../lib/tauri";
 import { GITHUB_RELEASES_PAGE } from "../lib/update";
@@ -16,6 +17,17 @@ export function UpdateCard() {
     openInstaller,
     openGithub,
   } = useAppUpdate();
+
+  if (!githubUpdatesEnabled()) {
+    return (
+      <section className="glass-card">
+        <h2>{t.settings.update}</h2>
+        <p>{interpolate(t.settings.currentVersion, { version: currentVersion })}</p>
+        <p>{t.settings.storeUpdates}</p>
+        <p className="muted">{t.settings.storeUpdatesHint}</p>
+      </section>
+    );
+  }
 
   const checking = phase === "checking";
   const downloading = phase === "downloading";

@@ -12,6 +12,7 @@ import { resetScrollTop } from "./lib/scroll";
 import { AppStateProvider, useAppState } from "./state";
 import { UpdateProvider, useAppUpdate } from "./updateState";
 import { applyDocumentLocale, interpolate, t } from "./i18n";
+import { githubUpdatesEnabled } from "./lib/channel";
 import { applyWindowTitle } from "./lib/tauri";
 import { useEffect, useRef } from "react";
 import "./App.css";
@@ -54,7 +55,7 @@ function Shell() {
         </header>
         {statusNote ? <p className="banner">{statusNote}</p> : null}
         {error ? <p className="banner error">{error}</p> : null}
-        {info?.updateAvailable && page !== "settings" ? (
+        {githubUpdatesEnabled() && info?.updateAvailable && page !== "settings" ? (
           <p className="banner update">
             <span>{interpolate(t.settings.updateBanner, { version: info.latestVersion })}</span>
             <button type="button" className="linkish" onClick={() => setPage("settings")}>

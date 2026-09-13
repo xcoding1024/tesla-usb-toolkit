@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { interpolate, t } from "./i18n";
+import { githubUpdatesEnabled } from "./lib/channel";
 import { formatBytes } from "./lib/format";
 import { isTauri } from "./lib/tauri";
 import {
@@ -34,6 +35,7 @@ function mapUpdateError(err: unknown, fallback: string): string {
   if (raw.includes("http_403") || raw.toLowerCase().includes("rate limit")) {
     return t.settings.updateRateLimited;
   }
+  if (raw.includes("store_channel")) return t.settings.storeUpdates;
   if (raw.includes("desktop_only")) return t.settings.updateBrowserHint;
   if (raw.includes("invalid_url") || raw.includes("invalid_filename") || raw.includes("http_")) {
     return fallback;
@@ -79,7 +81,7 @@ export function UpdateProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    if (!isTauri()) return;
+    if (!isTauri() || !githubUpdatesEnabled()) return;
     const timer = window.setTimeout(() => {
       void checkForUpdate(false);
     }, 1200);

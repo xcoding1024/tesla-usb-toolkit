@@ -1,3 +1,5 @@
+import { bundledDistributionChannel, githubUpdatesEnabled, type DistributionChannel } from "./channel";
+
 export const GITHUB_REPO = "xcoding1024/tesla-usb-toolkit";
 export const GITHUB_RELEASES_LATEST_API = `https://api.github.com/repos/${GITHUB_REPO}/releases/latest`;
 export const GITHUB_RELEASES_ATOM = `https://github.com/${GITHUB_REPO}/releases.atom`;
@@ -11,6 +13,8 @@ export interface AppInfo {
   version: string;
   platform: HostPlatform;
   arch: HostArch;
+  distributionChannel: DistributionChannel;
+  githubUpdates: boolean;
 }
 
 export interface GithubAsset {
@@ -177,6 +181,8 @@ export function browserAppInfo(): AppInfo {
     version: bundledAppVersion(),
     platform: "web",
     arch: inferBrowserArch(),
+    distributionChannel: bundledDistributionChannel(),
+    githubUpdates: githubUpdatesEnabled(),
   };
 }
 

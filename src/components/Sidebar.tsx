@@ -1,4 +1,5 @@
 import { t } from "../i18n";
+import { githubUpdatesEnabled } from "../lib/channel";
 import type { PageId } from "../state";
 import { useAppState } from "../state";
 import { useAppUpdate } from "../updateState";
@@ -68,7 +69,7 @@ export function Sidebar() {
           id="settings"
           label={t.nav.settings}
           icon={IconGear}
-          badge={Boolean(info?.updateAvailable)}
+          badge={githubUpdatesEnabled() && Boolean(info?.updateAvailable)}
         />
       </nav>
     </aside>

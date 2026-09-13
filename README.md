@@ -29,6 +29,7 @@ MVP is usable. Maintainer: **JiaXiang Huang**.
 - Format guide: [`docs/FORMAT_GUIDE.md`](docs/FORMAT_GUIDE.md)
 - Content types: [`docs/CONTENT_TYPES.md`](docs/CONTENT_TYPES.md)
 - Roadmap: [`docs/ROADMAP.md`](docs/ROADMAP.md)
+- Store packaging: [`STORE.md`](STORE.md)
 
 ## Tech stack
 
@@ -94,6 +95,16 @@ npm run tauri build
 ```
 
 `npx tauri dev` / `npx tauri build` also work. **npm** is the supported package manager.
+
+Release-channel vs store-channel builds:
+
+```bash
+npm run tauri:github            # GitHub Releases (MSI / NSIS / DMG, in-app updater)
+npm run tauri:microsoft-store   # Microsoft Store EXE/MSI (offline WebView2, no GitHub updater)
+npm run tauri:mac-app-store     # Mac App Store .app (sandbox entitlements, no GitHub updater)
+```
+
+See [`STORE.md`](STORE.md) for Partner Center / App Store Connect placeholders and known blockers.
 
 ## Detection rules (short)
 

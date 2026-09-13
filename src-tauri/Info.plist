@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>ITSAppUsesNonExemptEncryption</key>
+  <false/>
+  <key>LSMinimumSystemVersion</key>
+  <string>10.15</string>
+  <key>NSRemovableVolumesUsageDescription</key>
+  <string>USB Toolkit for Tesla reads removable drives so it can scan TeslaCam clips, Light Shows, wraps, and lock chimes, and can format a USB drive you confirm.</string>
+</dict>
+</plist>

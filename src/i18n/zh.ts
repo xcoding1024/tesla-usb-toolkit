@@ -396,6 +396,8 @@ export const zh = {
     updateRateLimited: "GitHub 请求过于频繁，请稍后再试。",
     updateBanner: "有新版本（{version}）可用。",
     updateBannerAction: "查看更新",
+    storeUpdates: "此商店版通过 Microsoft Store 或 Mac App Store 更新，已关闭 GitHub 自行更新。",
+    storeUpdatesHint: "请从商店页面安装更新，不要使用 GitHub Releases。",
   },
   status: {
     browserPreview: "浏览器预览模式：以下为示例数据。请使用 npm run tauri dev 检测真实 U 盘或文件夹。",

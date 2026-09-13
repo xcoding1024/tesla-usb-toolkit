@@ -1,5 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen, type UnlistenFn } from "@tauri-apps/api/event";
+import { githubUpdatesEnabled, parseDistributionChannel } from "./channel";
 import { isTauri } from "./tauri";
 import {
   browserAppInfo,
@@ -26,6 +27,8 @@ interface RustAppInfo {
   version: string;
   platform: string;
   arch: string;
+  distributionChannel?: string;
+  githubUpdates?: boolean;
 }
 
 const SUCCESS_CACHE_MS = 10 * 60 * 1000;
@@ -38,10 +41,13 @@ let lastError: { at: number; error: Error } | null = null;
 export async function loadAppInfo(): Promise<AppInfo> {
   if (!isTauri()) return browserAppInfo();
   const info = await invoke<RustAppInfo>("app_info");
+  const distributionChannel = parseDistributionChannel(info.distributionChannel);
   return {
     version: info.version,
     platform: parseHostPlatform(info.platform),
     arch: parseHostArch(info.arch),
+    distributionChannel,
+    githubUpdates: info.githubUpdates ?? distributionChannel === "github",
   };
 }
 
@@ -102,7 +108,13 @@ export async function fetchLatestReleaseJson(): Promise<unknown> {
 }
 
 export async function checkForAppUpdate(): Promise<UpdateInfo> {
+  if (!githubUpdatesEnabled()) {
+    throw new Error("store_channel");
+  }
   const [app, raw] = await Promise.all([loadAppInfo(), fetchLatestReleaseJson()]);
+  if (!app.githubUpdates) {
+    throw new Error("store_channel");
+  }
   return evaluateRelease({
     currentVersion: app.version,
     platform: app.platform,
@@ -112,6 +124,9 @@ export async function checkForAppUpdate(): Promise<UpdateInfo> {
 }
 
 export async function downloadUpdateAsset(asset: GithubAsset): Promise<string> {
+  if (!githubUpdatesEnabled()) {
+    throw new Error("store_channel");
+  }
   if (!isTauri()) {
     throw new Error("desktop_only");
   }

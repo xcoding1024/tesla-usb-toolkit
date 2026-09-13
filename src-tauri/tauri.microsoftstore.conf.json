@@ -1,0 +1,20 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "build": {
+    "features": ["store-channel"]
+  },
+  "bundle": {
+    "createUpdaterArtifacts": false,
+    "publisher": "coding1024",
+    "targets": ["nsis", "msi"],
+    "windows": {
+      "webviewInstallMode": {
+        "type": "offlineInstaller"
+      },
+      "digestAlgorithm": "sha256",
+      "certificateThumbprint": null,
+      "timestampUrl": null,
+      "signCommand": null
+    }
+  }
+}
