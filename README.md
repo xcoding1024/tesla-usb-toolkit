@@ -1,6 +1,6 @@
 # Tesla USB Toolkit
 
-**特斯拉 U 盘工具箱**
+[English](README.md) | [中文](README.zh.md)
 
 Cross-platform desktop app for **Windows / macOS**. Plug in a USB drive to scan TeslaCam clips, Light Shows, wraps, and lock chimes, then format the drive safely for the car.
 
@@ -118,17 +118,9 @@ Copyright © 2026 JiaXiang Huang.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Commit messages must be in **English**. Documentation is **English first**, with a short Chinese summary where it helps.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Commit messages must be in **English**. Documentation is **English first**; a full Chinese README is in [README.zh.md](README.zh.md), and other docs keep a short Chinese summary where it helps.
 
 ## Maintainers
 
 - JiaXiang Huang
 - Repository: https://github.com/xcoding1024/tesla-usb-toolkit
-
----
-
-## 中文简介
-
-跨平台（Windows / macOS）桌面应用：插入 U 盘后自动扫描行车记录、灯光秀、贴纸与锁车音效，并在 Windows / macOS 上安全格式化。Linux 只提供接口说明，不执行 mkfs。
-
-完整判定与冲突说明见 [`docs/DETECTION_RULES.md`](docs/DETECTION_RULES.md)。协议为 **GPL-3.0-or-later**：可以商用和收费分发，但不能做成闭源产品再发布。本项目与 Tesla, Inc. 无关。
