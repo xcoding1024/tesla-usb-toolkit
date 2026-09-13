@@ -3,6 +3,7 @@
 ## Language
 
 - **Commit messages**: English only. Use the imperative mood (`Add`, `Fix`, `Update`), and write one or two sentences on *why*.
+- **Pull requests**: titles and bodies in English (same tone as commits).
 - **Documentation**: English is the source of truth. Add a short **中文摘要** when the audience is mixed.
 - **UI copy**: keep `src/i18n/en.ts` and `src/i18n/zh.ts` on the same key tree. Default locale is English.
 

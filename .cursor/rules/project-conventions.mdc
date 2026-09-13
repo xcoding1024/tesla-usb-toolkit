@@ -6,6 +6,7 @@ alwaysApply: true
 # USB Toolkit for Tesla conventions
 
 - Commit messages must be English. Use the imperative mood (`Add`, `Fix`, `Update`) and explain why, not a file list.
+- Pull request titles and bodies must be English too.
 - Documentation is English first. Keep a short 中文摘要 when it helps Chinese readers. Do not make Chinese the primary doc language.
 - UI strings live in `src/i18n/en.ts` and `src/i18n/zh.ts` with the same key tree. Default locale is English.
 - Do not rewrite git history from tesla-usb-detector into this repo. This project starts clean.
