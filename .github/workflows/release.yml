@@ -123,8 +123,9 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Publish GitHub Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ needs.create-release.outputs.version }}
-        run: gh release edit "v${VERSION}" --draft=false
+        run: gh release edit "v${VERSION}" --draft=false --repo "${GITHUB_REPOSITORY}"
