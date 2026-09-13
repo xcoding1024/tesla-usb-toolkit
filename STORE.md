@@ -1,26 +1,28 @@
 # Store distribution
 
-**中文摘要：** GitHub 版继续用设置里的 Releases 更新。Microsoft Store / Mac App Store 构建会编译掉 GitHub 自更新。Tauri 2 不产出 `.msix`，商店提交用离线 WebView2 的 NSIS/MSI，或自行用 `Package.appxmanifest` 打包。Mac App Store 需要沙盒；`diskutil` 格式化 U 盘很可能被拒或无法工作。商店身份已预留；Publisher `CN=` 仍须从 Partner Center 复制，不要伪造证书。
+**中文摘要：** GitHub 版继续用设置里的 Releases 更新。Microsoft Store / Mac App Store 构建会编译掉 GitHub 自更新。Tauri 2 仍产出 NSIS/MSI，不产出 `.msix`。Partner Center 预留的产品类型是 **MSIX or PWA app**（不是 EXE/MSI）；若无法改成 EXE/MSI，需用 `Package.appxmanifest` 自行打 MSIX。Mac App Store 需要沙盒；`diskutil` 格式化 U 盘很可能被拒或无法工作。商店身份与 Publisher `CN=` 已从 Partner Center 填入，不要伪造证书。
 
 This repo ships **three desktop channels**. Do not upload binaries to the stores from CI; this is packaging prep only.
 
 | Channel | Updater | Installer | Who updates the app |
 | --- | --- | --- | --- |
 | **GitHub / direct** (default) | Settings → Updates downloads GitHub Releases | `.msi` / NSIS `.exe` / `.dmg` | The app + GitHub Releases |
-| **Microsoft Store** | GitHub updater **compiled out** | Offline WebView2 NSIS / MSI (Store may wrap as MSIX) | Microsoft Store |
+| **Microsoft Store** | GitHub updater **compiled out** | Tauri: offline WebView2 NSIS / MSI. Partner Center type: MSIX/PWA — self-pack MSIX if the listing cannot switch | Microsoft Store |
 | **Mac App Store** | GitHub updater **compiled out** | Signed `.app` → installer `.pkg` | Mac App Store |
 
 Bundle id stays `com.coding1024.tesla-toolkit`. English display name stays **USB Toolkit for Tesla**. Desktop only (no iOS / Android).
 
 ## Reserved identities
 
-Reserved in Partner Center / App Store Connect. Publisher `CN=` is still unknown — copy it from Partner Center when available. Do not invent a certificate Subject.
+Reserved in Partner Center / App Store Connect. Publisher `CN=` is copied from Partner Center. Do not invent a certificate Subject.
 
 | Field | Value |
 | --- | --- |
 | Microsoft Store ID | `9NJXSRQ51R1W` |
 | Package identity Name | `30625JiaXiangHuang.USBToolkitforTesla` |
 | Package Family Name (PFN) | `30625JiaXiangHuang.USBToolkitforTesla_0qzz0z9ekxn9j` |
+| Publisher `CN=` | `CN=7EEF2A3C-D8BC-4B91-9F2D-728958623431` |
+| Store product type | **MSIX or PWA app** (as reserved in Partner Center; not EXE/MSI) |
 | Mac App Store Connect App ID | `6811606662` |
 | Apple Team ID | `GFJDX458W5` |
 
@@ -51,7 +53,7 @@ Ad-hoc macOS signing (`signingIdentity: "-"`) and unsigned Windows installers ar
 
 ### 2. Microsoft Store
 
-[Tauri 2 does not have an `msix` bundle target](https://v2.tauri.app/distribute/microsoft-store/). Use Partner Center **EXE or MSI app** (Desktop Bridge). The Store can wrap that installer as MSIX and re-sign it.
+[Tauri 2 does not have an `msix` bundle target](https://v2.tauri.app/distribute/microsoft-store/). The store-channel build still emits NSIS/MSI (the EXE/MSI path, with offline WebView2). Partner Center reserved this product as **MSIX or PWA app**, not EXE/MSI. If the listing stays locked to MSIX/PWA, self-pack an MSIX with [`store/msix/Package.appxmanifest`](store/msix/Package.appxmanifest) instead of uploading the NSIS/MSI installer. Do not invent certificates; only the Partner Center `CN=` is recorded.
 
 ```bash
 npm ci
@@ -68,16 +70,13 @@ This merges [`src-tauri/tauri.microsoftstore.conf.json`](src-tauri/tauri.microso
 
 **Partner Center**
 
-1. Reserve the name (English: USB Toolkit for Tesla).
-2. Upload the NSIS `-setup.exe` or the `.msi`.
-3. Silent install: NSIS `/S` (uppercase S) or MSI `msiexec /quiet`.
-4. Fill identity from Partner Center — do not invent values:
-   - Package / identity name
-   - Publisher `CN=…` (Publisher ID)
-   - Publisher display name
+1. Name is reserved (English: USB Toolkit for Tesla). Product type in the console is **MSIX or PWA app**.
+2. Identities are recorded above (Store ID, package name, PFN, Publisher `CN=`). Do not invent further certificate values.
+3. If you can switch the listing to **EXE or MSI app**, upload the NSIS `-setup.exe` or the `.msi`. Silent install: NSIS `/S` (uppercase S) or MSI `msiexec /quiet`.
+4. If the listing stays **MSIX or PWA app**, do not upload the Tauri NSIS/MSI installer; self-pack MSIX as below.
 5. Code signing: leave `certificateThumbprint` / `signCommand` unset until you have a real Authenticode cert. **Do not commit `.pfx` / `.p12` files.** The Store re-signs the packaged app after submission.
 
-**Optional self-made MSIX** (sideload / advanced): copy the unpacked exe into a staging folder, replace TODOs in [`store/msix/Package.appxmanifest`](store/msix/Package.appxmanifest), add Store assets, then pack with [MakeAppx](https://learn.microsoft.com/windows/msix/package/create-app-package-with-makeappx-tool) or [winapp pack](https://learn.microsoft.com/windows/apps/dev-tools/winapp-cli/guides/tauri). Version must be four-part (`0.2.0.0`). Store submission still does not need you to sign with a fake cert.
+**Self-made MSIX** (needed if Partner Center stays on **MSIX or PWA app**): copy the unpacked exe into a staging folder, use the reserved identity in [`store/msix/Package.appxmanifest`](store/msix/Package.appxmanifest) (Publisher `CN=` is already filled), add Store assets, then pack with [MakeAppx](https://learn.microsoft.com/windows/msix/package/create-app-package-with-makeappx-tool) or [winapp pack](https://learn.microsoft.com/windows/apps/dev-tools/winapp-cli/guides/tauri). Version must be four-part (`0.2.0.0`). Store submission still does not need you to sign with a fake cert.
 
 Optional CI: [`.github/workflows/store.yml`](.github/workflows/store.yml) (`workflow_dispatch`) builds the Windows store-channel installer as an Actions artifact. It does **not** attach files to the GitHub Release.
 
@@ -117,10 +116,10 @@ Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`
 
 ### Microsoft Store
 
-- [ ] Product type is **EXE or MSI app**
-- [ ] Offline WebView2 installer
-- [ ] Silent-install flags registered
-- [ ] Partner Center Publisher ID / `CN=` pasted into listing and, if you self-pack MSIX, into `Package.appxmanifest`
+- [ ] Product type is **MSIX or PWA app** (as reserved in Partner Center). Tauri 2 still emits NSIS/MSI; if the listing cannot switch to EXE/MSI, self-pack MSIX from `Package.appxmanifest`
+- [ ] Offline WebView2 installer (still used by the Tauri store-channel NSIS/MSI build)
+- [ ] Silent-install flags registered if you submit EXE/MSI; skip if you only submit a self-packed MSIX
+- [ ] Partner Center Publisher `CN=7EEF2A3C-D8BC-4B91-9F2D-728958623431` matches the listing and `Package.appxmanifest`
 - [ ] No GitHub updater in the uploaded binary
 - [ ] Format-USB still needs Administrator on Windows; disclose that in the listing
 
@@ -136,13 +135,12 @@ Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`
 
 ## What you must fill later
 
-Reserved Store ID, package identity, PFN, ASC App ID, and Team ID are listed above. Still missing:
+Reserved Store ID, package identity, PFN, Publisher `CN=`, ASC App ID, and Team ID are listed above. Still missing:
 
 | Placeholder | Where | Real value |
 | --- | --- | --- |
 | `APPLE_SIGNING_IDENTITY` | env at build time | Apple Distribution cert **name** from Keychain |
 | `embedded.provisionprofile` | `src-tauri/macos/` (gitignored) | Mac App Store Connect profile |
-| `CN=TODO-PARTNER-CENTER-PUBLISHER-ID` | `store/msix/Package.appxmanifest` | Partner Center publisher `CN=` — copy from the console, never invent |
 | `certificateThumbprint` | only when you Authenticode-sign locally | SHA1 of a real cert — never a made-up hash |
 
 ## References
