@@ -226,8 +226,18 @@ async function runTour(page) {
   await goNav(page, "Light Show");
   await page.locator(".show-card").first().waitFor();
   await page.locator(".fseq-meta").first().waitFor();
+  await page.locator(".spectrum-stage").first().waitFor();
   await page.locator(".show-card").first().scrollIntoViewIfNeeded();
-  await sleep(1200);
+  await sleep(700);
+  const spectrum = page.locator(".spectrum-stage").first();
+  await spectrum.hover();
+  await sleep(80);
+  await spectrum.click();
+  await page.waitForFunction(() => {
+    const audio = document.querySelector(".audio-preview audio");
+    return Boolean(audio && !audio.paused);
+  });
+  await sleep(1800);
 
   await selectVolume(page, "demo:full");
   await goNav(page, "Wraps");
@@ -314,7 +324,10 @@ async function main() {
   await mkdir(workDir, { recursive: true });
   await mkdir(join(root, "docs", "promo"), { recursive: true });
 
-  const browser = await playwright.chromium.launch({ headless: true });
+  const browser = await playwright.chromium.launch({
+    headless: true,
+    args: ["--autoplay-policy=no-user-gesture-required"],
+  });
   const context = await browser.newContext({
     viewport: { width: VIEW_WIDTH, height: VIEW_HEIGHT },
     deviceScaleFactor: 1,

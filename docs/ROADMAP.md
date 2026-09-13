@@ -34,7 +34,7 @@ Reuse:
 
 - [x] TeslaCam clip list, grouped by event/time, in-app video
 - [x] Wrap PNG thumbnails and full preview (keep size/name checks)
-- [x] Light Show paired-audio preview; fseq header metadata; no light simulation
+- [x] Light Show paired-audio preview with live spectrum; fseq header metadata; no light simulation
 - [x] Lock chime / Boombox audio preview
 - [x] Tauri asset protocol; browser preview uses `public/demo`
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AudioPreview } from "../components/AudioPreview";
 import { EmptyState } from "../components/EmptyState";
 import { interpolate, t } from "../i18n";
 import { parseFseqHeader, type FseqInfo, type FseqIssue } from "../lib/fseq";
@@ -105,10 +106,7 @@ function ShowCard({ show, files }: { show: LightShowPair; files: ListedMediaFile
         </span>
       </div>
       {audioSrc ? (
-        <div className="audio-row">
-          <span>{t.lightShow.listenAudio}</span>
-          <audio controls preload="metadata" src={audioSrc} />
-        </div>
+        <AudioPreview src={audioSrc} label={t.lightShow.listenAudio} />
       ) : (
         <p className="muted">{t.preview.noMedia}</p>
       )}
@@ -197,7 +195,7 @@ export function LightShowPage() {
                     <li key={name}>
                       <strong>{name}</strong>
                       {file ? <span className="muted">{formatBytes(file.bytes)}</span> : null}
-                      {isAudio && src ? <audio controls preload="metadata" src={src} /> : null}
+                      {isAudio && src ? <AudioPreview src={src} label={t.lightShow.listenAudio} /> : null}
                       {name.toLowerCase().endsWith(".fseq") ? <FseqMeta file={file} /> : null}
                     </li>
                   );

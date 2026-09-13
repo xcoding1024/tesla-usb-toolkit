@@ -8,7 +8,7 @@ Sidebar pages: **Overview / Format / Dashcam / Light Show / Wraps / Lock Chime**
 | --- | --- | --- | --- |
 | Dashcam / Sentry | `TeslaCam/` | Recent / Saved / Sentry presence, counts, size, ready state | Events and clips (name, time, camera, size); in-app playback |
 | Track Mode | `TeslaTrackMode/` | Note on the dashcam page | File list with dashcam |
-| Light Show | `LightShow/` + `.fseq` + audio | Paired shows, orphans, root TeslaCam / update conflicts | Paired audio; fseq header (size / frames / duration / channels / compression) |
+| Light Show | `LightShow/` + `.fseq` + audio | Paired shows, orphans, root TeslaCam / update conflicts | Paired audio with live spectrum; fseq header (size / frames / duration / channels / compression) |
 | Wraps | `Wraps/` PNGs | Count, bytes, pixels, official-rule notes | Thumbnails + full image (validation notes stay visible) |
 | Lock chime | Root `LockChime.wav` | Present or missing | Audio preview |
 | Boombox | `Boombox/` | Sound list | Audio preview |
