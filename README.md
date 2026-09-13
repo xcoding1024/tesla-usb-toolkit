@@ -8,6 +8,15 @@ The UI is a dark glass sidebar (Overview, Format, Dashcam, Light Show, Wraps, Lo
 
 > This project is not affiliated with Tesla, Inc. Tesla is a trademark of Tesla, Inc.
 
+## Download
+
+Installers for **v0.1.0** are on [GitHub Releases](https://github.com/xcoding1024/tesla-usb-toolkit/releases/latest):
+
+- **Windows**: `.msi` or NSIS `.exe` (x64)
+- **macOS**: `.dmg` for Apple Silicon and Intel
+
+macOS builds are ad-hoc signed. If Gatekeeper blocks the app, allow it in **Privacy & Security**. Windows SmartScreen may warn because the installer is unsigned.
+
 ## Status
 
 MVP is usable. Maintainer: **JiaXiang Huang**.
