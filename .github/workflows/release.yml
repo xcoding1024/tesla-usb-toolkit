@@ -29,9 +29,9 @@ jobs:
         run: |
           set -euo pipefail
           TAG="v${VERSION}"
-          TITLE="Tesla USB Toolkit v${VERSION}"
+          TITLE="USB Toolkit for Tesla v${VERSION}"
           NOTES="$(cat <<EOF
-          Tesla USB Toolkit v${VERSION}
+          USB Toolkit for Tesla v${VERSION}
 
           ## Downloads
 

@@ -1,8 +1,8 @@
-# Tesla USB Toolkit
+# USB Toolkit for Tesla
 
 [English](README.md) | [中文](README.zh.md)
 
-![Tesla USB Toolkit tour](docs/promo/tour.gif)
+![USB Toolkit for Tesla tour](docs/promo/tour.gif)
 
 Cross-platform desktop app for **Windows / macOS**. Plug in a USB drive to scan TeslaCam clips, Light Shows, wraps, and lock chimes, then format the drive safely for the car.
 
@@ -129,9 +129,9 @@ docs/                Detection rules, format guide, content types, roadmap
 
 ## License
 
-Released under the [GNU General Public License v3.0 or later](LICENSE).
+Released under the [MIT License](LICENSE).
 
-You may use, modify, and distribute this software (including for a fee). If you distribute a modified version or a product based on this project, you must release it under the same GPL and provide the corresponding complete source. You may not ship a closed-source product built from this codebase.
+You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software, provided the copyright notice and permission notice are included.
 
 Copyright © 2026 JiaXiang Huang.
 

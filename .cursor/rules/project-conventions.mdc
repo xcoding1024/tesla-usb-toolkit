@@ -3,7 +3,7 @@ description: English commits and English-first documentation
 alwaysApply: true
 ---
 
-# Tesla USB Toolkit conventions
+# USB Toolkit for Tesla conventions
 
 - Commit messages must be English. Use the imperative mood (`Add`, `Fix`, `Update`) and explain why, not a file list.
 - Documentation is English first. Keep a short 中文摘要 when it helps Chinese readers. Do not make Chinese the primary doc language.

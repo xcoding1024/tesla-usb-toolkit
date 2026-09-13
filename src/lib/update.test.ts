@@ -18,28 +18,28 @@ import {
 
 const assets: GithubAsset[] = [
   {
-    name: "Tesla.USB.Toolkit_0.2.0_aarch64.app.tar.gz",
-    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/Tesla.USB.Toolkit_0.2.0_aarch64.app.tar.gz`,
+    name: "USB.Toolkit.for.Tesla_0.2.0_aarch64.app.tar.gz",
+    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/USB.Toolkit.for.Tesla_0.2.0_aarch64.app.tar.gz`,
     size: 10,
   },
   {
-    name: "Tesla.USB.Toolkit_0.2.0_aarch64.dmg",
-    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/Tesla.USB.Toolkit_0.2.0_aarch64.dmg`,
+    name: "USB.Toolkit.for.Tesla_0.2.0_aarch64.dmg",
+    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/USB.Toolkit.for.Tesla_0.2.0_aarch64.dmg`,
     size: 20,
   },
   {
-    name: "Tesla.USB.Toolkit_0.2.0_x64.dmg",
-    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/Tesla.USB.Toolkit_0.2.0_x64.dmg`,
+    name: "USB.Toolkit.for.Tesla_0.2.0_x64.dmg",
+    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/USB.Toolkit.for.Tesla_0.2.0_x64.dmg`,
     size: 21,
   },
   {
-    name: "Tesla.USB.Toolkit_0.2.0_x64-setup.exe",
-    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/Tesla.USB.Toolkit_0.2.0_x64-setup.exe`,
+    name: "USB.Toolkit.for.Tesla_0.2.0_x64-setup.exe",
+    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/USB.Toolkit.for.Tesla_0.2.0_x64-setup.exe`,
     size: 30,
   },
   {
-    name: "Tesla.USB.Toolkit_0.2.0_x64_en-US.msi",
-    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/Tesla.USB.Toolkit_0.2.0_x64_en-US.msi`,
+    name: "USB.Toolkit.for.Tesla_0.2.0_x64_en-US.msi",
+    browser_download_url: `${GITHUB_DOWNLOAD_PREFIX}v0.2.0/USB.Toolkit.for.Tesla_0.2.0_x64_en-US.msi`,
     size: 31,
   },
 ];
@@ -47,7 +47,7 @@ const assets: GithubAsset[] = [
 function release(overrides: Partial<GithubRelease> = {}): GithubRelease {
   return {
     tag_name: "v0.2.0",
-    name: "Tesla USB Toolkit v0.2.0",
+    name: "USB Toolkit for Tesla v0.2.0",
     body: "Bug fixes",
     html_url: "https://github.com/xcoding1024/tesla-usb-toolkit/releases/tag/v0.2.0",
     prerelease: false,
@@ -78,13 +78,13 @@ describe("installer assets", () => {
 
   it("picks the Windows MSI before the NSIS exe", () => {
     expect(pickUpdateAsset(assets, "windows", "x86_64")?.name).toBe(
-      "Tesla.USB.Toolkit_0.2.0_x64_en-US.msi",
+      "USB.Toolkit.for.Tesla_0.2.0_x64_en-US.msi",
     );
   });
 
   it("picks the macOS DMG that matches the CPU", () => {
-    expect(pickUpdateAsset(assets, "macos", "aarch64")?.name).toBe("Tesla.USB.Toolkit_0.2.0_aarch64.dmg");
-    expect(pickUpdateAsset(assets, "macos", "x86_64")?.name).toBe("Tesla.USB.Toolkit_0.2.0_x64.dmg");
+    expect(pickUpdateAsset(assets, "macos", "aarch64")?.name).toBe("USB.Toolkit.for.Tesla_0.2.0_aarch64.dmg");
+    expect(pickUpdateAsset(assets, "macos", "x86_64")?.name).toBe("USB.Toolkit.for.Tesla_0.2.0_x64.dmg");
   });
 
   it("does not invent a Linux installer", () => {
@@ -96,8 +96,8 @@ describe("download guards", () => {
   it("only allows this repo's GitHub release URLs and installer names", () => {
     expect(isAllowedDownloadUrl(`${GITHUB_DOWNLOAD_PREFIX}v0.2.0/app.dmg`)).toBe(true);
     expect(isAllowedDownloadUrl("https://evil.example/app.dmg")).toBe(false);
-    expect(sanitizeInstallerFilename("Tesla.USB.Toolkit_0.2.0_aarch64.dmg")).toBe(
-      "Tesla.USB.Toolkit_0.2.0_aarch64.dmg",
+    expect(sanitizeInstallerFilename("USB.Toolkit.for.Tesla_0.2.0_aarch64.dmg")).toBe(
+      "USB.Toolkit.for.Tesla_0.2.0_aarch64.dmg",
     );
     expect(sanitizeInstallerFilename("../app.dmg")).toBeNull();
     expect(sanitizeInstallerFilename("notes.txt")).toBeNull();
@@ -141,7 +141,7 @@ describe("evaluateRelease", () => {
 
   it("builds installer URLs from a release tag when the API is unavailable", () => {
     const fallback = conventionalAssets("v0.2.0");
-    expect(fallback.map((asset) => asset.name)).toContain("Tesla.USB.Toolkit_0.2.0_x64_en-US.msi");
+    expect(fallback.map((asset) => asset.name)).toContain("USB.Toolkit.for.Tesla_0.2.0_x64_en-US.msi");
     expect(fallback[0].browser_download_url).toContain("/releases/download/v0.2.0/");
   });
 
@@ -151,7 +151,7 @@ describe("evaluateRelease", () => {
         <entry>
           <id>tag:github.com,2008:Repository/1/v0.2.0</id>
           <link rel="alternate" href="https://github.com/xcoding1024/tesla-usb-toolkit/releases/tag/v0.2.0"/>
-          <title>Tesla USB Toolkit v0.2.0</title>
+          <title>USB Toolkit for Tesla v0.2.0</title>
           <content type="html">&lt;p&gt;Bug fixes&lt;/p&gt;</content>
         </entry>
       </feed>`);

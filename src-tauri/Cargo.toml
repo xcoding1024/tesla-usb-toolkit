@@ -1,9 +1,9 @@
 [package]
 name = "tesla-usb-detector"
 version = "0.2.0"
-description = "Tesla USB Toolkit for Windows and macOS"
+description = "USB Toolkit for Tesla on Windows and macOS"
 authors = ["JiaXiang Huang"]
-license = "GPL-3.0-or-later"
+license = "MIT"
 edition = "2021"
 rust-version = "1.88"
 

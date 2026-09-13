@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Tesla USB Toolkit",
+  "productName": "USB Toolkit for Tesla",
   "version": "0.2.0",
   "identifier": "com.coding1024.tesla-toolkit",
   "build": {
@@ -13,7 +13,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "Tesla USB Toolkit",
+        "title": "USB Toolkit for Tesla",
         "width": 1280,
         "height": 820,
         "minWidth": 960,
