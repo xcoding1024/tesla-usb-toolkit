@@ -1,10 +1,10 @@
-# Tesla USB Toolkit
+# USB Toolkit for Tesla
 
 **特斯拉 U 盘工具箱**
 
 [English](README.md) | [中文](README.zh.md)
 
-![Tesla USB Toolkit tour](docs/promo/tour.gif)
+![USB Toolkit for Tesla tour](docs/promo/tour.gif)
 
 跨平台桌面应用，支持 **Windows / macOS**。插入 U 盘后可扫描 TeslaCam 行车记录、灯光秀、贴纸与锁车音效，并在电脑上安全格式化，供车机使用。
 
@@ -131,9 +131,9 @@ docs/                判定规则、格式化指南、内容类型、路线图
 
 ## 许可证
 
-以 [GNU General Public License v3.0 or later](LICENSE) 发布。
+以 [MIT License](LICENSE) 发布。
 
-你可以复制、修改和分发本软件（包括收费）。若分发修改版或基于本项目的产品，必须以相同的 GPL 发布，并提供对应的完整源码。不得将本代码库做成闭源产品再发布。
+你可以复制、修改、合并、发布、分发、再授权和/或出售本软件的副本，只需保留版权声明与许可声明。
 
 Copyright © 2026 JiaXiang Huang.
 

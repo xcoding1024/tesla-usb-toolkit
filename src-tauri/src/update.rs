@@ -38,7 +38,7 @@ fn http_client() -> Result<&'static reqwest::Client, String> {
         return Ok(client);
     }
     let client = reqwest::Client::builder()
-        .user_agent(format!("Tesla-USB-Toolkit/{}", env!("CARGO_PKG_VERSION")))
+        .user_agent(format!("USB-Toolkit-for-Tesla/{}", env!("CARGO_PKG_VERSION")))
         .redirect(reqwest::redirect::Policy::limited(10))
         .build()
         .map_err(|err| err.to_string())?;
@@ -243,7 +243,7 @@ mod tests {
 
     #[test]
     fn rejects_unsafe_installer_names() {
-        assert!(sanitize_installer_filename("Tesla.USB.Toolkit_0.1.0_aarch64.dmg").is_ok());
+        assert!(sanitize_installer_filename("USB.Toolkit.for.Tesla_0.1.0_aarch64.dmg").is_ok());
         assert!(sanitize_installer_filename("../app.dmg").is_err());
         assert!(sanitize_installer_filename("notes.txt").is_err());
     }

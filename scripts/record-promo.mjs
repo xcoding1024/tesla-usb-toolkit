@@ -144,7 +144,7 @@ async function dressPage(page) {
       const bar = document.createElement("div");
       bar.className = "promo-chrome";
       bar.innerHTML =
-        '<span class="promo-dots"><i></i><i></i><i></i></span><span>Tesla USB Toolkit</span>';
+        '<span class="promo-dots"><i></i><i></i><i></i></span><span>USB Toolkit for Tesla</span>';
       document.body.prepend(bar);
     }
     const hideDemoCopy = () => {

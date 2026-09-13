@@ -18,4 +18,4 @@ Keep files under 50 MB (hard limit 100 MB). Do not commit `node_modules`, `src-t
 
 ## License
 
-By contributing, you agree that your work is licensed under **GPL-3.0-or-later**, the same as this repository.
+By contributing, you agree that your work is licensed under the **MIT License**, the same as this repository.
