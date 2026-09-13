@@ -30,25 +30,26 @@ jobs:
           set -euo pipefail
           TAG="v${VERSION}"
           TITLE="Tesla USB Toolkit v${VERSION}"
-          NOTES="$(cat <<'EOF'
-          First public release of Tesla USB Toolkit.
+          NOTES="$(cat <<EOF
+          Tesla USB Toolkit v${VERSION}
 
           ## Downloads
 
-          - **Windows**: `.msi` installer or NSIS `.exe` (x64)
-          - **macOS**: `.dmg` for Apple Silicon (`aarch64`) and Intel (`x86_64`)
+          - **Windows**: \`.msi\` installer or NSIS \`.exe\` (x64)
+          - **macOS**: \`.dmg\` for Apple Silicon (\`aarch64\`) and Intel (\`x86_64\`)
 
           macOS builds are ad-hoc signed. If Gatekeeper blocks the app, allow it in **Privacy & Security**. Windows SmartScreen may warn because the installer is unsigned.
 
-          ## Highlights
+          ## What's new
 
+          - Check GitHub Releases from Settings and download the matching Windows or macOS installer
           - Scan TeslaCam, Light Show, wraps, and lock chimes
           - Format removable drives as exFAT / FAT32 (and MS-DOS FAT on macOS)
           - System disks are rejected before format
 
           This project is not affiliated with Tesla, Inc.
 
-          **中文摘要：** 首个公开版本，提供 Windows 安装包与 macOS DMG。macOS 为临时签名；若系统提示无法打开，请在「隐私与安全性」中允许。
+          **中文摘要：** v${VERSION} 提供 Windows 安装包与 macOS DMG，并可在设置中检查 GitHub 更新。macOS 为临时签名；若系统提示无法打开，请在「隐私与安全性」中允许。
           EOF
           )"
 

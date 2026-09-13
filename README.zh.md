@@ -14,12 +14,14 @@
 
 ## 下载
 
-**v0.1.0** 安装包见 [GitHub Releases](https://github.com/xcoding1024/tesla-usb-toolkit/releases/latest)：
+**v0.2.0** 安装包见 [GitHub Releases](https://github.com/xcoding1024/tesla-usb-toolkit/releases/latest)：
 
 - **Windows**：`.msi` 或 NSIS `.exe`（x64）
 - **macOS**：Apple Silicon 与 Intel 的 `.dmg`
 
 macOS 为临时签名。若系统提示无法打开，请在「隐私与安全性」中允许。Windows SmartScreen 可能因未签名安装包发出警告。
+
+桌面应用可在 **设置 → 版本更新** 中检查 GitHub Releases，并下载对应安装包。
 
 ## 状态
 

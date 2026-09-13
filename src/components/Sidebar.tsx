@@ -1,6 +1,7 @@
 import { t } from "../i18n";
 import type { PageId } from "../state";
 import { useAppState } from "../state";
+import { useAppUpdate } from "../updateState";
 import {
   IconCamera,
   IconCar,
@@ -16,10 +17,12 @@ function NavButton({
   id,
   label,
   icon: Icon,
+  badge,
 }: {
   id: PageId;
   label: string;
   icon: typeof IconHome;
+  badge?: boolean;
 }) {
   const { page, setPage } = useAppState();
   return (
@@ -30,12 +33,14 @@ function NavButton({
     >
       <Icon className="nav-icon" />
       <span>{label}</span>
+      {badge ? <i className="nav-badge" aria-label={t.settings.updateBannerAction} /> : null}
     </button>
   );
 }
 
 export function Sidebar() {
   const { locale } = useAppState();
+  const { info } = useAppUpdate();
   const primary: { id: PageId; label: string; icon: typeof IconHome }[] = [
     { id: "overview", label: t.nav.overview, icon: IconHome },
     { id: "format", label: t.nav.format, icon: IconUsb },
@@ -59,7 +64,12 @@ export function Sidebar() {
         ))}
       </nav>
       <nav className="nav nav-secondary">
-        <NavButton id="settings" label={t.nav.settings} icon={IconGear} />
+        <NavButton
+          id="settings"
+          label={t.nav.settings}
+          icon={IconGear}
+          badge={Boolean(info?.updateAvailable)}
+        />
       </nav>
     </aside>
   );

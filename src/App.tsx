@@ -10,14 +10,16 @@ import { SettingsPage } from "./pages/SettingsPage";
 import { WrapsPage } from "./pages/WrapsPage";
 import { resetScrollTop } from "./lib/scroll";
 import { AppStateProvider, useAppState } from "./state";
-import { applyDocumentLocale, t } from "./i18n";
+import { UpdateProvider, useAppUpdate } from "./updateState";
+import { applyDocumentLocale, interpolate, t } from "./i18n";
 import { applyWindowTitle } from "./lib/tauri";
 import { useEffect, useRef } from "react";
 import "./App.css";
 
 function Shell() {
-  const { page, error, statusNote, refreshVolumes, runDetect, runEject, selectedVolume, folderOnly, busy, locale } =
+  const { page, setPage, error, statusNote, refreshVolumes, runDetect, runEject, selectedVolume, folderOnly, busy, locale } =
     useAppState();
+  const { info } = useAppUpdate();
   const pageScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,6 +54,14 @@ function Shell() {
         </header>
         {statusNote ? <p className="banner">{statusNote}</p> : null}
         {error ? <p className="banner error">{error}</p> : null}
+        {info?.updateAvailable && page !== "settings" ? (
+          <p className="banner update">
+            <span>{interpolate(t.settings.updateBanner, { version: info.latestVersion })}</span>
+            <button type="button" className="linkish" onClick={() => setPage("settings")}>
+              {t.settings.updateBannerAction}
+            </button>
+          </p>
+        ) : null}
         <div className="page-scroll" ref={pageScrollRef}>
           {page === "overview" ? <OverviewPage /> : null}
           {page === "format" ? <FormatPage /> : null}
@@ -70,7 +80,9 @@ function Shell() {
 export default function App() {
   return (
     <AppStateProvider>
-      <Shell />
+      <UpdateProvider>
+        <Shell />
+      </UpdateProvider>
     </AppStateProvider>
   );
 }

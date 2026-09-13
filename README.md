@@ -12,12 +12,14 @@ The UI is a dark glass sidebar (Overview, Format, Dashcam, Light Show, Wraps, Lo
 
 ## Download
 
-Installers for **v0.1.0** are on [GitHub Releases](https://github.com/xcoding1024/tesla-usb-toolkit/releases/latest):
+Installers for **v0.2.0** are on [GitHub Releases](https://github.com/xcoding1024/tesla-usb-toolkit/releases/latest):
 
 - **Windows**: `.msi` or NSIS `.exe` (x64)
 - **macOS**: `.dmg` for Apple Silicon and Intel
 
 macOS builds are ad-hoc signed. If Gatekeeper blocks the app, allow it in **Privacy & Security**. Windows SmartScreen may warn because the installer is unsigned.
+
+The desktop app can check GitHub Releases from **Settings → Updates** and download the matching installer.
 
 ## Status
 

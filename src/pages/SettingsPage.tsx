@@ -1,10 +1,13 @@
 import { RulesGuide } from "../components/RulesGuide";
-import { t, type Locale } from "../i18n";
+import { UpdateCard } from "../components/UpdateCard";
+import { interpolate, t, type Locale } from "../i18n";
 import { capabilityCopy } from "../lib/format";
 import { useAppState } from "../state";
+import { useAppUpdate } from "../updateState";
 
 export function SettingsPage() {
   const { tauri, capabilities, refreshVolumes, locale, setLocale } = useAppState();
+  const { currentVersion } = useAppUpdate();
 
   return (
     <div className="page">
@@ -15,7 +18,10 @@ export function SettingsPage() {
       <section className="glass-card">
         <h2>{t.settings.about}</h2>
         <p>{t.settings.aboutBody}</p>
+        <p className="muted">{interpolate(t.settings.currentVersion, { version: currentVersion })}</p>
       </section>
+
+      <UpdateCard />
 
       <section className="glass-card">
         <h2>{t.settings.language}</h2>

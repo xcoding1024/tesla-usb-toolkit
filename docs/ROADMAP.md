@@ -1,6 +1,6 @@
 # Roadmap
 
-**中文摘要：** 暗色玻璃侧栏，按内容导航；插入/切换 U 盘后自动扫描。Phase 0–3 与界面多语言已完成；v0.1.0 已提供 Windows / macOS 安装包。更新包深层识别仍待做。
+**中文摘要：** 暗色玻璃侧栏，按内容导航；插入/切换 U 盘后自动扫描。Phase 0–3 与界面多语言已完成；v0.2.0 已提供 Windows / macOS 安装包，并可从 GitHub 检查与下载更新。更新包深层识别仍待做。
 
 Dark glass sidebar. Navigation is by content (Overview, Format, Dashcam, Light Show, Wraps, Lock Chime; Settings at the bottom). Insert or switch a drive to scan.
 
@@ -46,4 +46,5 @@ Reuse:
 
 - [ ] Visual / empty / result polish
 - [ ] Windows + macOS device acceptance
+- [x] In-app GitHub update check and installer download
 - [ ] Privilege and installer notes

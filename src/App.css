@@ -275,6 +275,12 @@ h3 {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+a.ghost {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
 .ghost.compact {
   padding: 6px 12px;
   font-size: 13px;
@@ -910,6 +916,61 @@ h3 {
   color: #c5b4ff;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.banner.update {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid rgba(139, 92, 255, 0.35);
+}
+
+.nav-badge {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-radius: 50%;
+  background: #e14ec9;
+  box-shadow: 0 0 0 3px rgba(225, 78, 201, 0.18);
+}
+
+.update-actions {
+  margin-top: 12px;
+}
+
+.update-available {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.update-notes {
+  margin: 0;
+  max-height: 180px;
+  overflow: auto;
+  white-space: pre-wrap;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.update-progress-wrap {
+  margin-top: 8px;
+}
+
+.update-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: #1c2230;
+  overflow: hidden;
+}
+
+.update-progress i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7c5cff, #e14ec9);
 }
 
 .scan-summary {

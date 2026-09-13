@@ -1,4 +1,5 @@
 mod format;
+mod update;
 mod volumes;
 
 use format::{FormatCapabilities, FormatPreview, FormatResult};
@@ -56,7 +57,13 @@ pub fn run() {
             format_capabilities,
             preview_format,
             format_volume,
-            eject_volume
+            eject_volume,
+            update::app_info,
+            update::fetch_latest_github_release,
+            update::fetch_github_releases_atom,
+            update::download_update_asset,
+            update::open_update_installer,
+            update::open_external_url
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
