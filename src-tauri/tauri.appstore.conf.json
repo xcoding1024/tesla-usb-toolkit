@@ -10,7 +10,10 @@
       "hardenedRuntime": true,
       "minimumSystemVersion": "10.15",
       "entitlements": "./macos/Entitlements.store.plist",
-      "signingIdentity": null
+      "signingIdentity": null,
+      "files": {
+        "embedded.provisionprofile": "macos/embedded.provisionprofile"
+      }
     }
   }
 }
