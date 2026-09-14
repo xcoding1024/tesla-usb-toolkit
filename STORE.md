@@ -86,9 +86,9 @@ Requires a Mac, Apple Developer Program, and a **Mac App Store Connect** provisi
 
 ```bash
 # Entitlements already use Team ID GFJDX458W5.
-# Copy the downloaded profile to src-tauri/macos/embedded.provisionprofile
-# (gitignored), then add bundle.macOS.files.embedded.provisionprofile in the
-# App Store config or pass it locally.
+# Place the Mac App Store Connect profile at
+# src-tauri/macos/embedded.provisionprofile (gitignored) before building.
+# The App Store config already maps it via bundle.macOS.files.
 
 export APPLE_SIGNING_IDENTITY="Apple Distribution: Your Name (GFJDX458W5)"
 npm ci
@@ -97,7 +97,7 @@ npm run tauri:mac-app-store
 
 Then sign a `.pkg` with a **Mac Installer Distribution** certificate and upload with `xcrun altool` / Transporter. See the Tauri guide for `productbuild` and API keys.
 
-[`src-tauri/tauri.appstore.conf.json`](src-tauri/tauri.appstore.conf.json) enables `store-channel`, hardened runtime, Utility category (from the main config), 10.15 minimum, and [`macos/Entitlements.store.plist`](src-tauri/macos/Entitlements.store.plist).
+[`src-tauri/tauri.appstore.conf.json`](src-tauri/tauri.appstore.conf.json) enables `store-channel`, hardened runtime, Utility category (from the main config), 10.15 minimum, [`macos/Entitlements.store.plist`](src-tauri/macos/Entitlements.store.plist), and embeds `macos/embedded.provisionprofile`. That profile is gitignored at [`src-tauri/macos/`](src-tauri/macos/) and must be placed locally before `npm run tauri:mac-app-store`.
 
 Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`). **Do not invent signing certificates.** `signingIdentity` stays unset in git; set `APPLE_SIGNING_IDENTITY` when you build.
 
