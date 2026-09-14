@@ -24,7 +24,7 @@
     Version="0.2.0.0"
     ProcessorArchitecture="x64" />
   <Properties>
-    <DisplayName>USB Toolkit for Tesla</DisplayName>
+    <DisplayName>TTbox USB Toolkit</DisplayName>
     <PublisherDisplayName>JiaXiang Huang</PublisherDisplayName>
     <Description>Scan and format USB drives for Tesla vehicles.</Description>
     <Logo>Assets\StoreLogo.png</Logo>
@@ -40,9 +40,9 @@
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
   <Applications>
-    <Application Id="USBToolkitforTesla" Executable="USB Toolkit for Tesla.exe" EntryPoint="Windows.FullTrustApplication">
+    <Application Id="USBToolkitforTesla" Executable="TTbox USB Toolkit.exe" EntryPoint="Windows.FullTrustApplication">
       <uap:VisualElements
-        DisplayName="USB Toolkit for Tesla"
+        DisplayName="TTbox USB Toolkit"
         Description="Scan and format USB drives for Tesla vehicles."
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"

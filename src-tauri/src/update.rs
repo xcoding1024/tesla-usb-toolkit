@@ -294,7 +294,7 @@ mod tests {
 
     #[test]
     fn rejects_unsafe_installer_names() {
-        assert!(sanitize_installer_filename("USB.Toolkit.for.Tesla_0.1.0_aarch64.dmg").is_ok());
+        assert!(sanitize_installer_filename("TTbox.USB.Toolkit_0.1.0_aarch64.dmg").is_ok());
         assert!(sanitize_installer_filename("../app.dmg").is_err());
         assert!(sanitize_installer_filename("notes.txt").is_err());
     }

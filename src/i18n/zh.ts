@@ -1,9 +1,9 @@
 /** 中文文案表。与 `en.ts` 保持同一 key 树。 */
 export const zh = {
   app: {
-    name: "特斯拉 U 盘工具箱",
+    name: "TTbox U 盘工具箱",
     shortName: "U盘工具箱",
-    windowTitle: "特斯拉 U 盘工具箱",
+    windowTitle: "TTbox U 盘工具箱",
     htmlLang: "zh-CN",
     heroTitle: "特斯拉 U 盘内容识别",
     heroSubtitle: "插入 U 盘后自动扫描行车记录、灯光秀、贴纸与锁车音效",
@@ -359,7 +359,7 @@ export const zh = {
     title: "设置",
     about: "关于",
     aboutBody:
-      "特斯拉 U 盘工具箱：插入后自动扫描行车记录、灯光秀、贴纸与锁车音效，并在 Windows / macOS 上安全格式化。",
+      "TTbox U 盘工具箱：插入后自动扫描行车记录、灯光秀、贴纸与锁车音效，并在 Windows / macOS 上安全格式化。",
     language: "语言",
     languageZh: "中文",
     languageEn: "English",

@@ -1,10 +1,10 @@
-# USB Toolkit for Tesla
+# TTbox USB Toolkit
 
-**特斯拉 U 盘工具箱**
+**TTbox U 盘工具箱**
 
 [English](README.md) | [中文](README.zh.md)
 
-![USB Toolkit for Tesla tour](docs/promo/tour.gif)
+![TTbox USB Toolkit tour](docs/promo/tour.gif)
 
 跨平台桌面应用，支持 **Windows / macOS**。插入 U 盘后可扫描 TeslaCam 行车记录、灯光秀、贴纸与锁车音效，并在电脑上安全格式化，供车机使用。
 

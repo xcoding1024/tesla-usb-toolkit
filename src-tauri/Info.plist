@@ -7,6 +7,6 @@
   <key>LSMinimumSystemVersion</key>
   <string>10.15</string>
   <key>NSRemovableVolumesUsageDescription</key>
-  <string>USB Toolkit for Tesla reads removable drives so it can scan TeslaCam clips, Light Shows, wraps, and lock chimes, and can format a USB drive you confirm.</string>
+  <string>TTbox USB Toolkit reads removable drives so it can scan TeslaCam clips, Light Shows, wraps, and lock chimes, and can format a USB drive you confirm.</string>
 </dict>
 </plist>

@@ -1,8 +1,8 @@
-# USB Toolkit for Tesla
+# TTbox USB Toolkit
 
 [English](README.md) | [中文](README.zh.md)
 
-![USB Toolkit for Tesla tour](docs/promo/tour.gif)
+![TTbox USB Toolkit tour](docs/promo/tour.gif)
 
 Cross-platform desktop app for **Windows / macOS**. Plug in a USB drive to scan TeslaCam clips, Light Shows, wraps, and lock chimes, then format the drive safely for the car.
 

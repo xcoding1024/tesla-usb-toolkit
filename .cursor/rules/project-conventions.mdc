@@ -3,7 +3,7 @@ description: English commits and English-first documentation
 alwaysApply: true
 ---
 
-# USB Toolkit for Tesla conventions
+# TTbox USB Toolkit conventions
 
 - Commit messages must be English. Use the imperative mood (`Add`, `Fix`, `Update`) and explain why, not a file list.
 - Pull request titles and bodies must be English too.
