@@ -199,10 +199,10 @@ export function parseHostArch(value: string | undefined): HostArch {
 export function conventionalAssets(version: string): GithubAsset[] {
   const normalized = normalizeVersion(version);
   const names = [
-    `USB.Toolkit.for.Tesla_${normalized}_aarch64.dmg`,
-    `USB.Toolkit.for.Tesla_${normalized}_x64.dmg`,
-    `USB.Toolkit.for.Tesla_${normalized}_x64-setup.exe`,
-    `USB.Toolkit.for.Tesla_${normalized}_x64_en-US.msi`,
+    `TTbox.USB.Toolkit_${normalized}_aarch64.dmg`,
+    `TTbox.USB.Toolkit_${normalized}_x64.dmg`,
+    `TTbox.USB.Toolkit_${normalized}_x64-setup.exe`,
+    `TTbox.USB.Toolkit_${normalized}_x64_en-US.msi`,
   ];
   return names.map((name) => ({
     name,

@@ -10,7 +10,7 @@ This repo ships **three desktop channels**. Do not upload binaries to the stores
 | **Microsoft Store** | GitHub updater **compiled out** | Tauri: offline WebView2 NSIS / MSI. Partner Center type: MSIX/PWA — self-pack MSIX if the listing cannot switch | Microsoft Store |
 | **Mac App Store** | GitHub updater **compiled out** | Signed `.app` → installer `.pkg` | Mac App Store |
 
-Bundle id stays `com.coding1024.tesla-toolkit`. English display name stays **USB Toolkit for Tesla**. Desktop only (no iOS / Android).
+Bundle id stays `com.coding1024.tesla-toolkit`. English display name is **TTbox USB Toolkit**. Desktop only (no iOS / Android). Store consoles may still show the reserved listing name until you rename it there.
 
 ## Reserved identities
 
@@ -70,7 +70,7 @@ This merges [`src-tauri/tauri.microsoftstore.conf.json`](src-tauri/tauri.microso
 
 **Partner Center**
 
-1. Name is reserved (English: USB Toolkit for Tesla). Product type in the console is **MSIX or PWA app**.
+1. English display name is **TTbox USB Toolkit**. Partner Center / App Store Connect may still show the reserved listing name until you rename it in the console. Product type in the console is **MSIX or PWA app**.
 2. Identities are recorded above (Store ID, package name, PFN, Publisher `CN=`). Do not invent further certificate values.
 3. If you can switch the listing to **EXE or MSI app**, upload the NSIS `-setup.exe` or the `.msi`. Silent install: NSIS `/S` (uppercase S) or MSI `msiexec /quiet`.
 4. If the listing stays **MSIX or PWA app**, do not upload the Tauri NSIS/MSI installer; self-pack MSIX as below.
@@ -107,7 +107,7 @@ Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`
 
 ### Both stores
 
-- [ ] Store listing uses **USB Toolkit for Tesla**; Chinese UI may still say 特斯拉 U 盘工具箱
+- [ ] Store listing uses **TTbox USB Toolkit**; Chinese UI uses TTbox U 盘工具箱. Rename the reserved listing in Partner Center / App Store Connect if it still shows the old name.
 - [ ] Trademark: “Tesla” is Tesla, Inc. This project is not affiliated. Reviewers may require a name/subtitle change or a clearer disclaimer
 - [ ] Screenshots: Overview, Format, Dashcam, Light Show, Settings (store-update copy, no GitHub download)
 - [ ] Privacy / nutrition labels: local USB scan + optional format; no account; store builds do not call GitHub

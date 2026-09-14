@@ -3,9 +3,9 @@ import type { Messages } from "./zh";
 /** English catalog. Keep the same key tree as `zh.ts`. */
 export const en: Messages = {
   app: {
-    name: "USB Toolkit for Tesla",
+    name: "TTbox USB Toolkit",
     shortName: "USB Toolkit",
-    windowTitle: "USB Toolkit for Tesla",
+    windowTitle: "TTbox USB Toolkit",
     htmlLang: "en",
     heroTitle: "Identify Tesla USB contents",
     heroSubtitle: "Plug in a drive to scan dashcam clips, Light Shows, wraps, and lock chimes",
@@ -367,7 +367,7 @@ export const en: Messages = {
     title: "Settings",
     about: "About",
     aboutBody:
-      "USB Toolkit for Tesla scans dashcam clips, Light Shows, wraps, and lock chimes, and formats drives safely on Windows / macOS.",
+      "TTbox USB Toolkit scans dashcam clips, Light Shows, wraps, and lock chimes, and formats drives safely on Windows / macOS.",
     language: "Language",
     languageZh: "中文",
     languageEn: "English",

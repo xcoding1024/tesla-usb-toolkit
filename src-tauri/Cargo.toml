@@ -1,7 +1,7 @@
 [package]
 name = "tesla-usb-detector"
 version = "0.2.0"
-description = "USB Toolkit for Tesla on Windows and macOS"
+description = "TTbox USB Toolkit on Windows and macOS"
 authors = ["JiaXiang Huang"]
 license = "MIT"
 edition = "2021"
