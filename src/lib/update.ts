@@ -45,7 +45,7 @@ export interface UpdateInfo {
 }
 
 export function bundledAppVersion(): string {
-  return typeof __APP_VERSION__ === "string" && __APP_VERSION__ ? __APP_VERSION__ : "0.2.0";
+  return typeof __APP_VERSION__ === "string" && __APP_VERSION__ ? __APP_VERSION__ : "0.2.1";
 }
 
 export function normalizeVersion(input: string): string {

@@ -101,7 +101,7 @@ Release-channel vs store-channel builds:
 ```bash
 npm run tauri:github            # GitHub Releases (MSI / NSIS / DMG, in-app updater)
 npm run tauri:microsoft-store   # Microsoft Store EXE/MSI (offline WebView2, no GitHub updater)
-npm run tauri:mac-app-store     # Mac App Store .app (sandbox entitlements, no GitHub updater)
+npm run tauri:mac-app-store     # Mac App Store .app (sandbox + network.client, no GitHub updater)
 ```
 
 See [`STORE.md`](STORE.md) for Partner Center / App Store Connect placeholders and known blockers.

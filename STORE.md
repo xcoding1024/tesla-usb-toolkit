@@ -76,7 +76,7 @@ This merges [`src-tauri/tauri.microsoftstore.conf.json`](src-tauri/tauri.microso
 4. If the listing stays **MSIX or PWA app**, do not upload the Tauri NSIS/MSI installer; self-pack MSIX as below.
 5. Code signing: leave `certificateThumbprint` / `signCommand` unset until you have a real Authenticode cert. **Do not commit `.pfx` / `.p12` files.** The Store re-signs the packaged app after submission.
 
-**Self-made MSIX** (needed if Partner Center stays on **MSIX or PWA app**): copy the unpacked exe into a staging folder, use the reserved identity in [`store/msix/Package.appxmanifest`](store/msix/Package.appxmanifest) (Publisher `CN=` is already filled), add Store assets, then pack with [MakeAppx](https://learn.microsoft.com/windows/msix/package/create-app-package-with-makeappx-tool) or [winapp pack](https://learn.microsoft.com/windows/apps/dev-tools/winapp-cli/guides/tauri). Version must be four-part (`0.2.0.0`). Store submission still does not need you to sign with a fake cert.
+**Self-made MSIX** (needed if Partner Center stays on **MSIX or PWA app**): copy the unpacked exe into a staging folder, use the reserved identity in [`store/msix/Package.appxmanifest`](store/msix/Package.appxmanifest) (Publisher `CN=` is already filled), add Store assets, then pack with [MakeAppx](https://learn.microsoft.com/windows/msix/package/create-app-package-with-makeappx-tool) or [winapp pack](https://learn.microsoft.com/windows/apps/dev-tools/winapp-cli/guides/tauri). Version must be four-part (`0.2.1.0`). Store submission still does not need you to sign with a fake cert.
 
 Optional CI: [`.github/workflows/store.yml`](.github/workflows/store.yml) (`workflow_dispatch`) builds the Windows store-channel installer as an Actions artifact. It does **not** attach files to the GitHub Release.
 
@@ -99,7 +99,7 @@ Then sign a `.pkg` with a **Mac Installer Distribution** certificate and upload 
 
 [`src-tauri/tauri.appstore.conf.json`](src-tauri/tauri.appstore.conf.json) enables `store-channel`, hardened runtime, Utility category (from the main config), 10.15 minimum, [`macos/Entitlements.store.plist`](src-tauri/macos/Entitlements.store.plist), and embeds `macos/embedded.provisionprofile`. That profile is gitignored at [`src-tauri/macos/`](src-tauri/macos/) and must be placed locally before `npm run tauri:mac-app-store`.
 
-Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`). **Do not invent signing certificates.** `signingIdentity` stays unset in git; set `APPLE_SIGNING_IDENTITY` when you build.
+Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`). **`com.apple.security.network.client` is required:** a sandboxed WKWebView will not launch its WebContent process without outgoing-network permission, which shows a blank white window (App Review Guideline 2.1). This does not turn GitHub updates back on. **Do not invent signing certificates.** `signingIdentity` stays unset in git; set `APPLE_SIGNING_IDENTITY` when you build.
 
 [`src-tauri/Info.plist`](src-tauri/Info.plist) sets `ITSAppUsesNonExemptEncryption` to false (HTTPS-only) and a removable-volume usage string.
 
@@ -126,7 +126,7 @@ Entitlements use Team ID `GFJDX458W5` (`GFJDX458W5.com.coding1024.tesla-toolkit`
 ### Mac App Store
 
 - [ ] Bundle ID `com.coding1024.tesla-toolkit` matches App Store Connect
-- [ ] Sandbox + Team ID entitlements; embedded Mac App Store Connect profile
+- [ ] Sandbox + Team ID entitlements, including `com.apple.security.network.client` (WKWebView); embedded Mac App Store Connect profile
 - [ ] Hardened runtime on
 - [ ] Privacy text for removable volumes
 - [ ] **Known blocker — disk format:** the app runs `diskutil eraseVolume`. App Sandbox does not grant unrestricted disk management. Temporary `/Volumes` exceptions are often rejected. Format (and maybe auto-listing `/Volumes`) may fail or be grounds for rejection unless you drop format, use a user-selected folder only, or ship a privileged helper Apple accepts

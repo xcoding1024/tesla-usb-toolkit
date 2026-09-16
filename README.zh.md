@@ -103,7 +103,7 @@ GitHub 发布渠道与商店渠道：
 ```bash
 npm run tauri:github            # GitHub Releases（MSI / NSIS / DMG，应用内更新）
 npm run tauri:microsoft-store   # Microsoft Store 的 EXE/MSI（离线 WebView2，无 GitHub 更新）
-npm run tauri:mac-app-store     # Mac App Store 的 .app（沙盒 entitlements，无 GitHub 更新）
+npm run tauri:mac-app-store     # Mac App Store 的 .app（沙盒 + network.client，无 GitHub 更新）
 ```
 
 Partner Center / App Store Connect 占位符与已知阻碍见 [`STORE.md`](STORE.md)。
