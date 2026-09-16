@@ -8,6 +8,14 @@
   <string>GFJDX458W5.com.coding1024.tesla-toolkit</string>
   <key>com.apple.developer.team-identifier</key>
   <string>GFJDX458W5</string>
+  <!--
+    WKWebView's WebContent process will not launch in the App Sandbox
+    without outgoing network. Missing this entitlement is a blank white
+    window (Guideline 2.1). Store builds still do not call GitHub.
+    See https://github.com/tauri-apps/tauri-docs/issues/3171
+  -->
+  <key>com.apple.security.network.client</key>
+  <true/>
   <key>com.apple.security.files.user-selected.read-write</key>
   <true/>
   <key>com.apple.security.files.bookmarks.app-scope</key>

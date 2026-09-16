@@ -21,7 +21,7 @@
   <Identity
     Name="30625JiaXiangHuang.USBToolkitforTesla"
     Publisher="CN=7EEF2A3C-D8BC-4B91-9F2D-728958623431"
-    Version="0.2.0.0"
+    Version="0.2.1.0"
     ProcessorArchitecture="x64" />
   <Properties>
     <DisplayName>TTbox USB Toolkit</DisplayName>
