@@ -1,10 +1,5 @@
-import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-
-const storeEntitlements = readFileSync(
-  new URL("../../src-tauri/macos/Entitlements.store.plist", import.meta.url),
-  "utf8",
-);
+import storeEntitlements from "../../src-tauri/macos/Entitlements.store.plist?raw";
 
 describe("Mac App Store entitlements", () => {
   it("keeps sandbox identity and outgoing network so WKWebView can launch", () => {
